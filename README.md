@@ -4,7 +4,7 @@ A minimal, hackable, single-codebase playground for the question every "is atten
 
 **where does a state-space model actually beat a Transformer, and where does it lose?**
 
-Every nano-style repo in the lineage (minGPT → nanoGPT → nanochat) is a Transformer. nanoMambaChat keeps the same readable, dependency-light spirit but makes the **token-mixer a single flag**. The *exact same* model — same embeddings, norms, MLPs, residuals, training loop — runs as causal attention, as a Mamba-style selective SSM, or as a hybrid of the two. Then it hands you the two things you need to form an opinion: a **diagnostic suite** that probes the capabilities the architectures genuinely differ on, and a **speedrun** that shows the linear-vs-quadratic scaling on your own GPU.
+Every nano-style repo in the lineage (minGPT → nanoGPT → nanochat) is a Transformer. viper-ssm keeps the same readable, dependency-light spirit but makes the **token-mixer a single flag**. The *exact same* model — same embeddings, norms, MLPs, residuals, training loop — runs as causal attention, as a Mamba-style selective SSM, or as a hybrid of the two. Then it hands you the two things you need to form an opinion: a **diagnostic suite** that probes the capabilities the architectures genuinely differ on, and a **speedrun** that shows the linear-vs-quadratic scaling on your own GPU.
 
 It's small enough to read in an afternoon (~700 lines of core code, torch + numpy only) and cheap enough to run the experiments for the price of coffee.
 
@@ -93,7 +93,7 @@ speedrun.py      throughput vs context length                  (the scaling)
 tests/test_scan.py
 ```
 
-## Roadmap → the full nanoMambaChat
+## Roadmap → the full viper-ssm
 
 This v0 is the comparison engine and a char-level pretrainer. The path to a full nanochat-style assistant, in order:
 
