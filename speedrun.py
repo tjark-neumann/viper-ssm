@@ -1,14 +1,13 @@
 """
-Speedrun — the throughput benchmark that shows the linear-time claim is real.
+speedrun
 
-Sweeps context length and measures forward+backward throughput for each mixer.
-Attention's cost curves up quadratically; the SSM stays roughly linear. You see
-the crossover with your own eyes, on your own GPU, in about a minute.
+sweeps context length and measures forward+backward throughput for each mixer.
+attention's cost curves up quadratically, the SSM stays roughly linear.
 
     python speedrun.py
     python speedrun.py --lengths 128 256 512 1024 2048 --mixers attention ssm
 
-This is the cheap, no-$100-required demo. The full "time-to-target-loss"
+this is the cheap demo. the full time-to-target-loss
 leaderboard run goes on real data via train.py (see the README).
 """
 
