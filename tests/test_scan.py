@@ -1,9 +1,13 @@
 """
-The one test that matters: the fast parallel scan must agree with the slow,
-obviously-correct sequential scan. If this passes, the SSM you train with
+the fast parallel scan must agree with the slow,
+obviously-correct sequential scan. if this passes, the SSM you train with
 --scan parallel computes the same thing as --scan sequential.
 
-    python -m pytest tests/ -q      # or just: python tests/test_scan.py
+    python -m pytest tests/ -q
+    
+or just:
+
+    python tests/test_scan.py
 """
 
 import os
