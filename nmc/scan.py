@@ -1,41 +1,41 @@
 """
-The selective scan — the heart of a state-space model.
+selective scan
 
-A linear recurrence over a sequence:
+a linear recurrence over a sequence:
 
     h_t = a_t * h_{t-1} + b_t
     y_t = c_t . h_t   (+ D * u_t)
 
 where, for the selective (input-dependent) SSM, the coefficients are produced
-*from the input* at every step:
+from the input at every step:
 
     a_t = exp(delta_t * A)           (the "decay", always in (0, 1) since A < 0)
     b_t = delta_t * B_t * u_t        (the discretised input)
 
-Two implementations live here, and they must agree:
+two implementations live here, and they must agree:
 
-  * `selective_scan_sequential` — the obvious O(L) loop. The reference. Always
+  * `selective_scan_sequential`: the obvious O(L) loop. The reference. Always
     correct. This is what you read to understand what an SSM *is*.
 
-  * `selective_scan_parallel`   — the same recurrence in closed form, computed
+  * `selective_scan_parallel`: the same recurrence in closed form, computed
     with cumulative products/sums so a whole chunk is done in parallel, then
-    sequentially carried across chunks. This is where the "linear-time but still
-    fast on a GPU" claim actually lives. Validated against the sequential version
+    sequentially carried across chunks. this is where the "linear-time but still
+    fast on a GPU" claim actually lives. validated against the sequential version
     in tests/test_scan.py.
 
-The closed form: unrolling the recurrence gives
+the closed form: unrolling the recurrence gives
 
     h_t = sum_{j<=t} ( prod_{k=j+1..t} a_k ) * b_j
 
-Let P_t = prod_{k<=t} a_k = exp(cumsum(log a)). Then prod_{j+1..t} a_k = P_t / P_j
-and so h_t = P_t * cumsum( b_j / P_j ). That is the parallel form.
+let P_t = prod_{k<=t} a_k = exp(cumsum(log a)). then prod_{j+1..t} a_k = P_t / P_j
+and so h_t = P_t * cumsum( b_j / P_j ). that is the parallel form.
 
-THE CATCH: P_j is a cumulative product that decays toward zero, so b_j / P_j
-overflows on any non-trivial sequence. The fix (and what the parallel scan below
-actually does) is to *reset* the cumulative product at every chunk boundary and
-carry the hidden state across chunks by hand — bounding the dynamic range to one
-chunk's worth of decay. Parallel within a chunk, sequential across them. Default
-everywhere is `sequential`; switch to `parallel` for speed once you trust it.
+P_j is a cumulative product that decays toward zero, so b_j / P_j
+overflows on any non-trivial sequence. the fix (and what the parallel scan below
+actually does) is to reset the cumulative product at every chunk boundary and
+carry the hidden state across chunks by hand, bounding the dynamic range to one
+chunk's worth of decay. parallel within a chunk, sequential across them. default
+everywhere is `sequential`. switch to `parallel` for speed once you trust it.
 """
 
 import torch
