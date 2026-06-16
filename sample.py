@@ -1,7 +1,6 @@
 """
-Sample from a trained checkpoint.
-
-    python sample.py --ckpt model.pt --prompt "ROMEO:" --tokens 400
+sample from a trained checkpoint
+python sample.py --ckpt model.pt --prompt "ROMEO:" --tokens 400
 """
 
 import argparse
