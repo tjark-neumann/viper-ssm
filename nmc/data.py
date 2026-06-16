@@ -1,7 +1,10 @@
 """
-Char-level data. The whole point is to stay dependency-light: a text file in,
-integer tensors out, no tokenizer library. (A real BPE tokenizer is a roadmap
-item; char-level is enough to train a coherent model and to run every diagnostic.)
+char-level data 
+
+staying dependency-light: a text file in,
+integer tensors out, no tokenizer library. real BPE tokenizer is a roadmap
+item. char-level is enough to train a coherent model 
+and to run every diagnostic for this purpose
 """
 
 import os
