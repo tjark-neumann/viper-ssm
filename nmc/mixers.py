@@ -1,19 +1,20 @@
 """
-Token mixers — the one component that nanoMambaChat swaps.
+token mixers:
+the one component that viper-ssm swaps
 
-Both mixers take (batch, length, d_model) and return (batch, length, d_model),
+both mixers take (batch, length, d_model) and return (batch, length, d_model),
 so the surrounding architecture (norm, MLP, residuals, embeddings, head) is
-*identical* regardless of which one you pick. That is deliberate: it makes the
-attention-vs-SSM comparison a controlled experiment. The only thing that changes
+identical regardless of which one you pick. that is deliberate: it makes the
+attention-vs-SSM comparison a controlled experiment. the only thing that changes
 between runs is how tokens talk to each other.
 
-  * CausalSelfAttention — standard multi-head causal attention. O(L^2) compute,
+  * CausalSelfAttention: standard multi-head causal attention. O(L^2) compute,
     O(L) state at inference (the KV cache grows with context).
 
-  * SelectiveSSM       — a minimal Mamba-style selective state-space mixer (S6):
+  * SelectiveSSM: a minimal Mamba-style selective state-space mixer (S6):
     input-dependent (B, C, delta), a learned decay A, a short causal conv, and a
     SiLU gate. O(L) compute, O(1) state per step at inference (fixed-size hidden
-    state, independent of context length). This is the whole pitch.
+    state, independent of context length).
 """
 
 import math
