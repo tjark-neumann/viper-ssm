@@ -1,11 +1,11 @@
 """
-Pretrain a char-level model.
+pretrain a char-level model.
 
     python train.py --mixer ssm        --dial 6 --steps 2000
     python train.py --mixer attention  --dial 6 --steps 2000
     python train.py --mixer hybrid     --dial 6 --steps 2000
 
-Same command, one flag changes the architecture. That is the experiment.
+same command, one flag changes the architecture.
 """
 
 import argparse
