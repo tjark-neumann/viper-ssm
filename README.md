@@ -1,4 +1,4 @@
-# nanoMambaChat
+# viper-ssm
 
 A minimal, hackable, single-codebase playground for the question every "is attention all you need?" thread eventually reaches:
 
