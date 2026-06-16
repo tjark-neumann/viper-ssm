@@ -1,8 +1,8 @@
 """
-The model.
+model
 
-A plain decoder-only language model with one twist: every block's token-mixer is
-chosen by config, so the *same* class is an attention Transformer, a Mamba-style
+plain decoder-only language model with one twist: every block's token-mixer is
+chosen by config, so the same class is an attention transformer, a Mamba-style
 SSM, or a hybrid, depending on one flag. Norm -> mixer -> residual,
 Norm -> MLP -> residual. Pre-norm, RMSNorm, untied... actually weight-tied head,
 because at this scale tying helps and it is one fewer thing to explain.
