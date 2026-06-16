@@ -1,10 +1,9 @@
 """
-Configuration — and the single dial.
+configuration and single dial
 
-Everything about the model size is derived from one number, `dial`, the same way
-nanochat derives a whole family of models from `depth`. Turn the dial up, spend
-more compute, get a bigger model; every other dimension follows a fixed rule so
-you are never tuning a dozen knobs by hand. You are choosing a point on a curve.
+everything about the model size is derived from one number, dial, the same way
+nanochat derives a whole family of models from depth. turn the dial up, spend
+more compute, get a bigger model. every other dimension follows a fixed rule.
 """
 
 from dataclasses import dataclass
@@ -12,24 +11,24 @@ from dataclasses import dataclass
 
 @dataclass
 class Config:
-    # --- the dial ---
+    # dial
     dial: int = 6                 # sets n_layer; d_model and n_head follow
 
-    # --- vocab / context (set by the data or task) ---
+    # vocab / context (set by the data or task)
     vocab_size: int = 256
     seq_len: int = 256
 
-    # --- token mixer ---
+    # token mixer
     mixer: str = "ssm"            # "attention" | "ssm" | "hybrid"
     hybrid_period: int = 4        # in hybrid mode, 1 of every N layers is attention
 
-    # --- derived transformer dims (filled by from_dial) ---
+    # derived transformer dims (filled by from_dial)
     n_layer: int = 6
     d_model: int = 384
     n_head: int = 6
     mlp_mult: int = 4
 
-    # --- ssm-specific ---
+    # ssm-specific
     d_state: int = 16
     d_conv: int = 4
     expand: int = 2
