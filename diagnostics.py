@@ -1,5 +1,5 @@
 """
-Diagnostics — the part that makes this repo worth reading.
+Diagnostics
 
 Three synthetic tasks, each probing a capability the architecture-vs-architecture
 debate actually turns on:
@@ -21,8 +21,6 @@ on held-out samples. Run all three across all mixers:
     python diagnostics.py --task recall         # one task
     python diagnostics.py --mixers ssm attention
 
-The headline isn't "attention wins" or "SSM wins" — it's the *shape* of where each
-does. That table is the contribution.
 """
 
 import argparse
@@ -30,7 +28,7 @@ import torch
 
 from nmc import Config, LM
 
-# ---- task generators -------------------------------------------------------
+# task generators
 # Every generator returns (x, y) of shape (batch, L). Positions we don't score
 # are set to -1 in y (ignored by cross-entropy). Vocab layout is per-task.
 
@@ -100,7 +98,7 @@ TASKS = {
     "needle": gen_needle,
 }
 
-# ---- train / eval one (task, mixer) ---------------------------------------
+# train/eval one (task, mixer)
 
 
 def run(task, mixer, steps, dial, device):
