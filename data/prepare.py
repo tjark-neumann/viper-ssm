@@ -1,5 +1,5 @@
 """
-Download the tiny-shakespeare dataset (~1MB) to data/input.txt.
+download the tiny-shakespeare dataset to data/input.txt
 
     python data/prepare.py
 """
